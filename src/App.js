@@ -31,7 +31,7 @@ function App() {
     <div>
       <ul data-testid="repository-list">
         {repos.map(repo => (
-          <li>
+          <li key={repo.id}>
             {repo.title}
             <button onClick={() => handleRemoveRepository(repo.id)}>
               Remover
@@ -40,7 +40,7 @@ function App() {
         ))
         }
       </ul>
-
+      <input type="text" placeholder="Repository name" />
       <button onClick={handleAddRepository}>Adicionar</button>
     </div>
   );
