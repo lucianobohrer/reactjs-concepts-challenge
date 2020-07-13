@@ -13,14 +13,17 @@ function App() {
   }, [])
 
   async function handleAddRepository() {
-    // TODO
+    const response = await api.post("repositories", {
+      title: `Repo random ${Date.now()}`,
+    });
+
+    setRepos([...repos, response.data]);
   }
 
   async function handleRemoveRepository(id) {
     await api.delete(`repositories/${id}`)
-    .then(() => {
-      const index = repos.findIndex( repo => repo.id === id);
-      if (index >= 0) {
+    .then((res) => {
+      if (res.status === 204) {
         const updateRepos = repos.filter(project => project.id !== id);
         setRepos([...updateRepos]);
       }
